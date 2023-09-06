@@ -1,4 +1,4 @@
-package com.sunwook.wms.product.feature;
+package com.sunwook.wms.product.domain;
 
 public enum TemperatureZone {
 

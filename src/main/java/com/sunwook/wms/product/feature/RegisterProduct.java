@@ -1,5 +1,6 @@
 package com.sunwook.wms.product.feature;
 
+import com.sunwook.wms.product.domain.*;
 import org.springframework.util.Assert;
 
 public class RegisterProduct {

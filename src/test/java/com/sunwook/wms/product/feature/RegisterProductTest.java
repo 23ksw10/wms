@@ -1,5 +1,8 @@
 package com.sunwook.wms.product.feature;
 
+import com.sunwook.wms.product.domain.Category;
+import com.sunwook.wms.product.domain.ProductRepository;
+import com.sunwook.wms.product.domain.TemperatureZone;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
