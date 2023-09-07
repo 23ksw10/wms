@@ -16,6 +16,7 @@ class RegisterProductTest extends ApiTest {
     @Autowired
     private ProductRepository productRepository;
 
+
     @Test
     @DisplayName("상품을 생성한다.")
     void registerProduct() {
