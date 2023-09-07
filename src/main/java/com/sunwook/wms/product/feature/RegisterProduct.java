@@ -28,6 +28,15 @@ public class RegisterProduct {
         productRepository.save(product);
     }
 
+    private void validateProductCodeExists(final String code) {
+        productRepository.findAll().stream()
+                .filter(product -> product.getCode().equals(code))
+                .findFirst()
+                .ifPresent(product -> {
+                    throw new IllegalArgumentException("이미 등록된 상품코드입니다");
+                });
+    }
+
     public record Request(
             @NotBlank(message = "상품명은 필수입니다")
             String name,
