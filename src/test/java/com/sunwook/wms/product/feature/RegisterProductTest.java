@@ -1,8 +1,8 @@
 package com.sunwook.wms.product.feature;
 
 import com.sunwook.wms.common.ApiTest;
+import com.sunwook.wms.common.Scenario;
 import com.sunwook.wms.product.domain.ProductRepository;
-import com.sunwook.wms.product.feature.api.RegisterProductApi;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +16,11 @@ class RegisterProductTest extends ApiTest {
     @Autowired
     private ProductRepository productRepository;
 
-
     @Test
     @DisplayName("상품을 생성한다.")
     void registerProduct() {
         // given
-        new RegisterProductApi().request();
+        Scenario.registerProduct().request();
 
         //then
         assertThat(productRepository.findAll()).hasSize(1);

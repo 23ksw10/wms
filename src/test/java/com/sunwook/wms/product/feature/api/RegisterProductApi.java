@@ -1,5 +1,6 @@
 package com.sunwook.wms.product.feature.api;
 
+import com.sunwook.wms.common.Scenario;
 import com.sunwook.wms.product.domain.Category;
 import com.sunwook.wms.product.domain.TemperatureZone;
 import com.sunwook.wms.product.feature.RegisterProduct;
@@ -33,7 +34,7 @@ public class RegisterProductApi {
         return this;
     }
 
-    public void request() {
+    public Scenario request() {
 
         RegisterProduct.Request request = new RegisterProduct.Request(
                 "name",
@@ -57,5 +58,6 @@ public class RegisterProductApi {
                 .post("/products")
                 .then().log().all()
                 .statusCode(HttpStatus.CREATED.value());
+        return new Scenario();
     }
 }
