@@ -1,17 +1,19 @@
 package com.sunwook.wms.inbound.domain;
 
+import lombok.Getter;
 import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class Inbound {
+    @Getter
+    private Long id;
     private final String title;
     private final String description;
     private final LocalDateTime orderRequestedAt;
     private final LocalDateTime estimatedArrivalAt;
     private final List<InboundItem> inboundItems;
-    private Long id;
 
     public Inbound
             (String title,
@@ -49,7 +51,4 @@ public class Inbound {
         this.id = id;
     }
 
-    public Long getId() {
-        return id;
-    }
 }

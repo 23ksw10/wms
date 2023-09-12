@@ -20,23 +20,33 @@ class RegisterInbound {
 
     public void request(Request request) {
         // TODO 요청을 도메인으로 변경해서 도메인을 저장한다.
-        List<InboundItem> inboundItems = request.inboundItems.stream()
-                .map(item ->
-                        new InboundItem(
-                                productRepository.findById(item.productId).orElseThrow(),
-                                item.quantity,
-                                item.unitPrice,
-                                item.description
-                        ))
-                .toList();
-        Inbound inbound = new Inbound(
+        Inbound inbound = createInbound(request);
+        inboundRepository.save(inbound);
+    }
+
+    private Inbound createInbound(Request request) {
+        return new Inbound(
                 request.title,
                 request.description,
                 request.orderRequestedAt,
                 request.estimatedArrivalAt,
-                inboundItems
+                mapToInboundItems(request)
         );
-        inboundRepository.save(inbound);
+    }
+
+    private List<InboundItem> mapToInboundItems(Request request) {
+        return request.inboundItems.stream()
+                .map(this::newInboundItems)
+                .toList();
+    }
+
+    private InboundItem newInboundItems(Request.Item item) {
+        return new InboundItem(
+                productRepository.getBy(item.productId),
+                item.quantity,
+                item.unitPrice,
+                item.description
+        );
     }
 
     public record Request(
