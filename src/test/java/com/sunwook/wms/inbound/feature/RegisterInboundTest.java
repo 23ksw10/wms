@@ -1,15 +1,17 @@
 package com.sunwook.wms.inbound.feature;
 
 import com.sunwook.wms.inbound.domain.InboundRepository;
-import com.sunwook.wms.product.domain.*;
+import com.sunwook.wms.product.domain.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+import static com.sunwook.wms.product.fixture.ProductFixture.aProduct;
+import static org.mockito.Mockito.*;
 
 public class RegisterInboundTest {
     private RegisterInbound registerInbound;
@@ -18,7 +20,7 @@ public class RegisterInboundTest {
 
     @BeforeEach
     void setUp() {
-        productRepository = Mockito.mock(ProductRepository.class);
+        productRepository = mock(ProductRepository.class);
         inboundRepository = new InboundRepository();
         registerInbound = new RegisterInbound(productRepository, inboundRepository);
     }
@@ -26,23 +28,8 @@ public class RegisterInboundTest {
     @Test
     @DisplayName("입고를 등록한다.")
     void registerInbound() {
-        Product product = new Product(
-                "name",
-                "code",
-                "description",
-                "brand",
-                "maker",
-                "origin",
-                Category.ELECTRONICS,
-                TemperatureZone.ROOM_TEMPERATURE,
-                1000L,
-                new ProductSize(
-                        100L,
-                        100L,
-                        100L)
-        );
-        Mockito.when(productRepository.findById(Mockito.anyLong()))
-                .thenReturn(Optional.of(product));
+        when(productRepository.findById(anyLong()))
+                .thenReturn(Optional.of(aProduct().build()));
 
         final LocalDateTime orderRequestedAt = LocalDateTime.now();
         final LocalDateTime estimatedArrivalAt = LocalDateTime.now().plusDays(1);
