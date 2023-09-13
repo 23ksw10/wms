@@ -5,13 +5,14 @@ import com.sunwook.wms.product.domain.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import static com.sunwook.wms.product.fixture.ProductFixture.aProduct;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.mock;
 
 public class RegisterInboundTest {
     private RegisterInbound registerInbound;
@@ -28,8 +29,8 @@ public class RegisterInboundTest {
     @Test
     @DisplayName("입고를 등록한다.")
     void registerInbound() {
-        when(productRepository.findById(anyLong()))
-                .thenReturn(Optional.of(aProduct().build()));
+        Mockito.when(productRepository.getBy(anyLong()))
+                .thenReturn(aProduct().build());
 
         final LocalDateTime orderRequestedAt = LocalDateTime.now();
         final LocalDateTime estimatedArrivalAt = LocalDateTime.now().plusDays(1);
