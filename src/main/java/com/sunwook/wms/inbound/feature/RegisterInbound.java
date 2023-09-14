@@ -22,7 +22,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-class RegisterInbound {
+public class RegisterInbound {
     private final ProductRepository productRepository;
     private final InboundRepository inboundRepository;
 
